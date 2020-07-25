@@ -1,6 +1,6 @@
 en:
   js:
     spoiler:
-      title: Blur Spoiler
+      title: Skin Viewer
     composer:
-      spoiler_text: "This text will be blurred"
+      spoiler_text: "pic"

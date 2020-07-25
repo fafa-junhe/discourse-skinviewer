@@ -11,11 +11,45 @@ function spoil($elem) {
 
 function initializeSpoiler(api) {
   api.decorateCooked(spoil, { id: "spoiler-alert" });
+api.decorateCooked($elem =>
+	$elem
+		.children('div[id="spoiled"]')
+		// do your work here for example:
+		.imagesLoaded(function() {
+      let skin = $("#skin_container")
+          if(skin.length){
+    if(skin.children().length === 0){
+    if(skin.parent().children().first().children().hasClass("d-lazyload-hidden")){
+      skin = skin.prev().first().children().first().next()[0].src;
+    }
+    else{
+      skin = skin.prev().first().children().first()[0].src;
+    }
+    let skinViewer = new skinview3d.SkinViewer(document.getElementById("skin_container"), {
+    width: 300,
+    height: 400,
+    skin : skin
+ });
+  skinViewer.width = 600;
+  skinViewer.height = 800;
+ let control = skinview3d.createOrbitControls(skinViewer);
+  control.enableRotate = true;
+ control.enableZoom = true;
+  control.enablePan = true;
+ let walk = skinViewer.animations.add(skinview3d.WalkingAnimation);
+ let rotate = skinViewer.animations.add(skinview3d.RotatingAnimation);
+
+		}}}))
+  // code block to be executed
+// TopicRoute.reopen({
+//
+//  })}});
+
 
   api.addToolbarPopupMenuOptionsCallback(() => {
     return {
       action: "insertSpoiler",
-      icon: "magic",
+      icon: "cubes",
       label: "spoiler.title"
     };
   });
@@ -24,8 +58,8 @@ function initializeSpoiler(api) {
     actions: {
       insertSpoiler() {
         this.get("toolbarEvent").applySurround(
-          "[spoiler]",
-          "[/spoiler]",
+          "[skinviewer]",
+          "[/skinviewer]",
           "spoiler_text",
           { multiline: false, useBlockMode: true }
         );
@@ -37,8 +71,8 @@ function initializeSpoiler(api) {
     Tag.prototype.decorate = function(text) {
       const attr = this.element.attributes;
       if (attr.class === "spoiled") {
-        this.prefix = "[spoiler]";
-        this.suffix = "[/spoiler]";
+        this.prefix = "[skinviewer]";
+        this.suffix = "[/skinviewer]";
       }
 
       if (this.prefix || this.suffix) {
@@ -69,8 +103,8 @@ function initializeSpoiler(api) {
           }
 
           if (this.name === "div" && attr.class === "spoiled") {
-            this.prefix = "[spoiler]";
-            this.suffix = "[/spoiler]";
+            this.prefix = "[skinviewer]";
+            this.suffix = "[/skinviewer]";
             text = text.trim();
           }
 

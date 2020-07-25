@@ -11,7 +11,7 @@ describe PrettyText do
   end
 
   it 'can spoil blocks' do
-    md = PrettyText.cook("[spoiler]\nmy tests fail\n[/spoiler]")
+    md = PrettyText.cook("[skinviewer]\nmy tests fail\n[/skinviewer]")
     html = "<div class=\"spoiler\">\n<p>my tests fail</p>\n</div>"
 
     expect(md).to eq(html)

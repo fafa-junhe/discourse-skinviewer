@@ -8,7 +8,7 @@ const CONTAINS_BLOCK_REGEX = /\n|<img|!\[[^\]]*\][(\[]/;
 
 function insertSpoiler(_, spoiler) {
   const element = CONTAINS_BLOCK_REGEX.test(spoiler) ? "div" : "span";
-  return `<${element} class='spoiler'>${spoiler}</${element}>`;
+  return `<${element} class='skinviewer'>${spoiler}</${element}>`;
 }
 
 function replaceSpoilers(text) {
@@ -16,7 +16,7 @@ function replaceSpoilers(text) {
   while (
     text !==
     (text = text.replace(
-      /\[spoiler\]((?:(?!\[spoiler\]|\[\/spoiler\])[\S\s])*)\[\/spoiler\]/gi,
+      /\[skinviewer\]((?:(?!\[skinviewer\]|\[\/skinviewer\])[\S\s])*)\[\/skinviewer\]/gi,
       insertSpoiler
     ))
   );
@@ -30,12 +30,12 @@ function setupMarkdownIt(helper) {
 
   helper.registerPlugin(md => {
     md.inline.bbcode.ruler.push("spoiler", {
-      tag: "spoiler",
+      tag: "skinviewer",
       wrap: "span.spoiler"
     });
 
     md.block.bbcode.ruler.push("spoiler", {
-      tag: "spoiler",
+      tag: "skinviewer",
       wrap: "div.spoiler"
     });
   });

@@ -19,20 +19,11 @@
   };
 
   var applySpoilers = function($spoiler) {
-    $spoiler.data("spoiler-state", "blurred");
-
-    applyBlur($spoiler);
-
-    $spoiler.on("click", function(e) {
-      if ($spoiler.data("spoiler-state") === "blurred") {
-        $spoiler.data("spoiler-state", "revealed");
-        $spoiler.removeClass("spoiler-blurred");
-        e.preventDefault();
-      } else {
-        $spoiler.data("spoiler-state", "blurred");
-        $spoiler.addClass("spoiler-blurred");
-      }
-    });
+    $spoiler = $spoiler.get(0);
+    var container = document.createElement("div");
+    container.id = "skin_container";
+    $spoiler.appendChild(container);
+    return $spoiler;
   };
 
   $.fn.spoil = function() {

@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-# name: discourse-spoiler-alert
-# about: Uses the Spoiler Alert plugin to blur text when spoiling it.
+# name: discourse-skinviewer
+# about: minecraft 3d Skin viewer
 # version: 0.4
-# authors: Robin Ward, Regis Hanol
-# url: https://github.com/discourse/discourse-spoiler-alert
+# authors: fafa_junhe
+# url:
 
 enabled_site_setting :spoiler_enabled
 
 register_asset "javascripts/spoiler.js"
-register_asset "stylesheets/discourse_spoiler_alert.css"
-
+register_asset "javascripts/skinview3d.bundle.js"
+register_asset "javascripts/imagesloaded.min.js"
 after_initialize do
 
   on(:reduce_cooked) do |fragment, post|
