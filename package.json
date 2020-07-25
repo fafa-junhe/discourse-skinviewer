@@ -7,6 +7,7 @@
   "devDependencies": {
     "babel-eslint": "^8.2",
     "eslint": "^4.19",
-    "prettier": "1.14.3"
+    "prettier": "1.14.3",
+    "skinview3d": "npm i skinview3d",
   }
 }

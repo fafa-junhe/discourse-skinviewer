@@ -1,7 +1,6 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { Tag } from "discourse/lib/to-markdown";
 import ComposerController from "discourse/controllers/composer";
-
 function spoil($elem) {
   $(".spoiler", $elem)
     .removeClass("spoiler")
