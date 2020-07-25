@@ -9,7 +9,7 @@
 enabled_site_setting :spoiler_enabled
 
 register_asset "javascripts/spoiler.js"
-register_asset "javascripts/skinview3d.bundle.js.es6"
+register_asset "javascripts/skinview3d.bundle.js.es5"
 register_asset "javascripts/imagesloaded.min.js"
 after_initialize do
 
