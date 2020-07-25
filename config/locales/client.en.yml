@@ -1,6 +1,6 @@
 en:
   js:
-    spoiler:
+    skinviewer:
       title: Skin Viewer
     composer:
-      spoiler_text: "pic"
+      skin_text: "pic"

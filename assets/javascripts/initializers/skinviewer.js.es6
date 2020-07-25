@@ -1,18 +1,16 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { Tag } from "discourse/lib/to-markdown";
 import ComposerController from "discourse/controllers/composer";
-function spoil($elem) {
-  $(".spoiler", $elem)
-    .removeClass("spoiler")
-    .addClass("spoiled")
-    .spoil();
+function skind($elem) {
+  $(".skinviewer", $elem)
+    .skind();
 }
-
-function initializeSpoiler(api) {
-  api.decorateCooked(spoil, { id: "spoiler-alert" });
+function initializeSkinviewer(api) {
+  console.log($("#skinviewer"))
+    api.decorateCooked(skind, { id: "skinviewer" });
 api.decorateCooked($elem =>
 	$elem
-		.children('div[id="spoiled"]')
+		.children('div[id="skinviewer"]')
 		// do your work here for example:
 		.imagesLoaded(function() {
       let skin = $("#skin_container")
@@ -47,19 +45,19 @@ api.decorateCooked($elem =>
 
   api.addToolbarPopupMenuOptionsCallback(() => {
     return {
-      action: "insertSpoiler",
+      action: "insertSkinviewer",
       icon: "cubes",
-      label: "spoiler.title"
+      label: "skinviewer.title"
     };
   });
 
   ComposerController.reopen({
     actions: {
-      insertSpoiler() {
+      insertSkinviewer() {
         this.get("toolbarEvent").applySurround(
           "[skinviewer]",
           "[/skinviewer]",
-          "spoiler_text",
+          "skin_text",
           { multiline: false, useBlockMode: true }
         );
       }
@@ -69,7 +67,7 @@ api.decorateCooked($elem =>
   if (Tag) {
     Tag.prototype.decorate = function(text) {
       const attr = this.element.attributes;
-      if (attr.class === "spoiled") {
+      if (attr.class === "skinviewer") {
         this.prefix = "[skinviewer]";
         this.suffix = "[/skinviewer]";
       }
@@ -101,7 +99,7 @@ api.decorateCooked($elem =>
             this.gap = "";
           }
 
-          if (this.name === "div" && attr.class === "spoiled") {
+          if (this.name === "div" && attr.class === "skinviewer") {
             this.prefix = "[skinviewer]";
             this.suffix = "[/skinviewer]";
             text = text.trim();
@@ -115,11 +113,11 @@ api.decorateCooked($elem =>
 }
 
 export default {
-  name: "apply-spoilers",
+  name: "apply-skinviewer",
   initialize(container) {
     const siteSettings = container.lookup("site-settings:main");
-    if (siteSettings.spoiler_enabled) {
-      withPluginApi("0.5", initializeSpoiler);
+    if (siteSettings.skinview_enabled) {
+      withPluginApi("0.5", initializeSkinviewer);
     }
   }
 };

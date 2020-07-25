@@ -1,23 +1,23 @@
 import { registerOption } from "pretty-text/pretty-text";
 
 registerOption((siteSettings, opts) => {
-  opts.features["spoiler-alert"] = !!siteSettings.spoiler_enabled;
+  opts.features["skinviewer-alert"] = !!siteSettings.skinview_enabled;
 });
 
 const CONTAINS_BLOCK_REGEX = /\n|<img|!\[[^\]]*\][(\[]/;
 
-function insertSpoiler(_, spoiler) {
-  const element = CONTAINS_BLOCK_REGEX.test(spoiler) ? "div" : "span";
-  return `<${element} class='skinviewer'>${spoiler}</${element}>`;
+function insertSkinviewer(_, skinviewer) {
+  const element = CONTAINS_BLOCK_REGEX.test(skinviewer) ? "div" : "span";
+  return `<${element} class='skinviewer'>${skinviewer}</${element}>`;
 }
 
-function replaceSpoilers(text) {
+function replaceSkinviewer(text) {
   text = text || "";
   while (
     text !==
     (text = text.replace(
       /\[skinviewer\]((?:(?!\[skinviewer\]|\[\/skinviewer\])[\S\s])*)\[\/skinviewer\]/gi,
-      insertSpoiler
+      insertSkinviewer
     ))
   );
   return text;
@@ -25,28 +25,27 @@ function replaceSpoilers(text) {
 
 function setupMarkdownIt(helper) {
   helper.registerOptions((opts, siteSettings) => {
-    opts.features["spoiler-alert"] = !!siteSettings.spoiler_enabled;
+    opts.features["skinviewer-alert"] = !!siteSettings.skinview_enabled;
   });
 
   helper.registerPlugin(md => {
-    md.inline.bbcode.ruler.push("spoiler", {
+    md.inline.bbcode.ruler.push("skinviewer", {
       tag: "skinviewer",
-      wrap: "span.spoiler"
+      wrap: "span.skinviewer"
     });
 
-    md.block.bbcode.ruler.push("spoiler", {
+    md.block.bbcode.ruler.push("skinviewer", {
       tag: "skinviewer",
-      wrap: "div.spoiler"
+      wrap: "div.skinviewer"
     });
   });
 }
 
 export function setup(helper) {
-  helper.whiteList(["span.spoiler", "div.spoiler"]);
-
+  helper.whiteList(["span.skinviewer", "div.skinviewer"]);
   if (helper.markdownIt) {
     setupMarkdownIt(helper);
   } else {
-    helper.addPreProcessor(replaceSpoilers);
+    helper.addPreProcessor(replaceSkinviewer);
   }
 }

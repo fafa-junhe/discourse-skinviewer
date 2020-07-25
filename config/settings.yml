@@ -1,4 +1,4 @@
 plugins:
-  spoiler_enabled:
+  skinview_enabled:
     default: true
     client: true
