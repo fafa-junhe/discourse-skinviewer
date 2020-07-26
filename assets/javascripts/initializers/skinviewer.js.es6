@@ -1,3 +1,4 @@
+
 import { withPluginApi } from "discourse/lib/plugin-api";
 import { Tag } from "discourse/lib/to-markdown";
 import ComposerController from "discourse/controllers/composer";
@@ -36,11 +37,8 @@ api.decorateCooked($elem =>
  let walk = skinViewer.animations.add(skinview3d.WalkingAnimation);
  let rotate = skinViewer.animations.add(skinview3d.RotatingAnimation);
 
-		}}}))
-  // code block to be executed
-// TopicRoute.reopen({
-//
-//  })}});
+}}}))
+
 
 
   api.addToolbarPopupMenuOptionsCallback(() => {

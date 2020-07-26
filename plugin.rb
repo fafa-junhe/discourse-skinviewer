@@ -9,7 +9,7 @@
 enabled_site_setting :skinview_enabled
 
 register_asset "javascripts/skinviewer.js"
-register_asset "javascripts/skinview3d.bundle.js.es5"
+register_asset "javascripts/skinview3d.bundle.js"
 register_asset "javascripts/imagesloaded.min.js"
 after_initialize do
 
