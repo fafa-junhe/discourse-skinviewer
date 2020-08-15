@@ -2,7 +2,7 @@
 
 # name: discourse-skinviewer
 # about: minecraft 3d Skin viewer
-# version: 0.4
+# version: 0.5
 # authors: fafa_junhe
 # url:
 

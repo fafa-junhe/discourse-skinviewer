@@ -6,38 +6,46 @@ function skind($elem) {
   $(".skinviewer", $elem)
     .skind();
 }
+
 function initializeSkinviewer(api) {
-  console.log($("#skinviewer"))
+  var isMobileDevice = $("html").hasClass("mobile-device");
+
     api.decorateCooked(skind, { id: "skinviewer" });
 api.decorateCooked($elem =>
 	$elem
 		.children('div[id="skinviewer"]')
 		// do your work here for example:
 		.imagesLoaded(function() {
-      let skin = $("#skin_container")
+    $(".skinviewer > #skin_container").each(function(){
+          let skin = $(this)
+          let a = "";
           if(skin.length){
     if(skin.children().length === 0){
     if(skin.parent().children().first().children().hasClass("d-lazyload-hidden")){
-      skin = skin.prev().first().children().first().next()[0].src;
+      a = skin.prev().first().children().first().next()[0].src;
     }
     else{
-      skin = skin.prev().first().children().first()[0].src;
+      a = skin.prev().first().children().first()[0].src;
     }
-    let skinViewer = new skinview3d.SkinViewer(document.getElementById("skin_container"), {
-    width: 300,
-    height: 400,
-    skin : skin
+    let skinViewer = new skinview3d.SkinViewer(skin[0], {
+    skin : a
  });
-  skinViewer.width = 600;
+  skinViewer.width = 300;
   skinViewer.height = 800;
  let control = skinview3d.createOrbitControls(skinViewer);
-  control.enableRotate = true;
- control.enableZoom = true;
-  control.enablePan = true;
- let walk = skinViewer.animations.add(skinview3d.WalkingAnimation);
- let rotate = skinViewer.animations.add(skinview3d.RotatingAnimation);
+  control.enableRotate = !isMobileDevice;
+ control.enableZoom = !isMobileDevice;
+  control.enablePan = !isMobileDevice;
 
-}}}))
+ skinViewer.animations.add(skinview3d.WalkingAnimation);
+ let rotate = skinViewer.animations.add(skinview3d.RotatingAnimation);
+ if (!isMobileDevice){
+ rotate.speed = 0.1;
+}
+else{
+  rotate.speed = 1;
+}
+}}})}))
 
 
 

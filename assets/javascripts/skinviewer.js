@@ -3,7 +3,6 @@
 
 
   var applyskinviewer = function($skinviewer) {
-        console.log("yes!");
 
     $skinviewer = $skinviewer.get(0);
     var container = document.createElement("div");
